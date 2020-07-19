@@ -1,0 +1,54 @@
+
+
+<!-- 单例模式的定义：保证⼀个类仅有⼀个实例，并提供⼀个访问它的全局访问点。实现的⽅法为先
+判断实例存在与否，如果存在则直接返回，如果不存在就创建了再返回，这就确保了⼀个类只有
+⼀个实例对象。 -->
+<!-- 适⽤场景：⼀个单⼀对象。⽐如：弹窗，⽆论点击多少次，弹窗只应该被创建⼀次' 实现起来也很简
+单，⽤⼀个变量缓存即可 -->
+
+<!-- 比如redux的store可以理解为单利模式 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .model{
+            border:1px solid black;
+            position: fixed;
+            width:300px;
+            height:300px;
+            top:20%;
+            left:50%;
+            margin-left:-150px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="loginBtn">点我</div>
+    <script>
+        var getSingle = function( fn ){
+            var result;
+            return function(){
+                return result || ( result = fn .apply(this, arguments ) );
+            }
+        };
+        var createLoginLayer = function(){
+            var div = document.createElement( 'div' );
+            div.innerHTML = '我是登录浮窗';
+            div.className = 'model'
+            div.style.display = 'none'; 
+            document.body.appendChild( div );
+            return div;
+        };
+        var createSingleLoginLayer = getSingle( createLoginLayer );
+        document.getElementById( 'loginBtn' ).onclick = function(){
+            var loginLayer = createSingleLoginLayer();
+            loginLayer.style.display = 'block';
+        };
+    </script>
+</body>
+</html>
