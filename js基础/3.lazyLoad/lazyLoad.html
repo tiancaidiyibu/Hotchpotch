@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src='loading.gif' data-src="https://img2020.cnblogs.com/blog/2016690/202007/2016690-20200717105942214-957138008.png"></img>
+    <script>
+        // 获取所有的图⽚标签
+        const imgs = document.getElementsByTagName('img')
+        // 获取可视区域的⾼度
+        const veiwHeight = window.innerHeight || document.documentElement.clientHeight
+        // num⽤于统计当前显示到了哪⼀张图⽚，避免每次都从第⼀张图⽚开始检查是否露出
+        let num = 0
+        function lazyload (){
+            for(let i  = num;i<imgs.length;i++){
+                // ⽤可视区域⾼度减去元素顶部距离可视区域顶部的⾼度
+                let distance = veiwHeight - imgs[i].getBoundingClientRect().top
+                if(distance>=0){
+                    imgs[i].src = imgs[i].getAttribute('data-src')
+                    // 前i张图⽚已经加载完毕，下次从第i+1张开始检查是否露出
+                    num = i + 1
+                }
+            }
+        }
+        // 监听Scroll事件
+        window.addEventListener('scroll', lazyload, false);
+
+    </script>
+    
+</body>
+</html>
