@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1  div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+        }
+        #div1 {
+            display: flex;
+            /* flex-wrap: wrap; */
+            flex-direction: row;
+            /* 超出是否换行  nowrap  wrap  wrap-reverse*/
+            /* flex-wrap: nowrap;  */
+            /* 属性是 flex-direction 和 flex-wrap 的简写形式 */
+            /* flex-flow: row-reverse; */
+            /* 处理项目外的 富余空间) */
+            /* justify-content:space-around */
+
+            /* align-items(属性决定项目在交叉轴上如何对齐) */
+            /* align-items:baseline; */
+            /* align-content: space-between; */
+        }
+        #div2 {
+            /* order: 3; */
+            /* flex-grow: 4; */
+            flex-shrink: 4;
+        }
+        #div3 {
+            /* order: 2; */
+            /* flex-grow: 3; */
+            flex-shrink: 3;
+
+        }
+        #div4 {
+            /* order: 5; */
+        }
+    </style>
+</head>
+<body>
+    <div id='div1'>
+        <div id='div2'>2222</div>
+        <div id='div3' style="height: 150px;">33333</div>
+        <div id='div4'>4444</div>
+    </div>
+</body>
+</html>

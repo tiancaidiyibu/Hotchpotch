@@ -19,7 +19,6 @@
 //     return res
 // }
 
-
 // Function.prototype.bind = function (context){
 //     let self = this
 //     let args = [].slice.call(arguments,1)

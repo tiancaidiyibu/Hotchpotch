@@ -2,10 +2,6 @@ const PENDING  = 'PENDING'
 const RESOLVED = 'RESOLVED'
 const REJECTD = 'REJECTD'
 
-
-
-
-
 const resolvePromise = (promise2,x,resolve,reject) => {
     if(promise2 === x){
         return
