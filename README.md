@@ -1,7 +1,1 @@
-# Hotchpotch
-学习大杂烩
-
-面试
-前端性能
-网络基础
-等等
+http://assets.processon.com/chart_image/5f2ec3dde0b34d4554b5705e.png
