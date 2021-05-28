@@ -19,7 +19,7 @@
 // console.log(child2.name) //[ 'ikki', 'lucky', 'haha' ]  造成了引用类型的属性被所有实例共享
 // console.log(child1.__proto__.__proto__ === Parent.prototype) //true
 
-// 2.借用构造函数继承
+// 2.构造函数继承
 /* 
     优点：
         1.避免了引用类型的属性被所有实例共享
