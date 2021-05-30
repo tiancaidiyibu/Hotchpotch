@@ -9,8 +9,59 @@
         2.关于setTimeout要补充的是，即便主线程为空，0毫秒实际上也是达不到的。根据HTML的标准，最低是4毫秒。
 */
 
-/* 
-    宏任务和微任务：
+/*
+    不同类型的任务会对应的事件队列，这里就分为宏任务和微任务：
         macro-task(宏任务)：包括整体代码script, setTimeout，setInterval
         micro-task(微任务)：Promise, process.nextTick
 */
+setTimeout(function() {
+    console.log('setTimeout'); //4
+})
+new Promise(function(resolve) {
+    console.log('promise');     //1
+}).then(function() {
+    console.log('then'); //3
+})
+console.log('console'); //2
+
+
+
+console.log('1');
+setTimeout(function() {
+    console.log('2');
+    process.nextTick(function() {
+        console.log('3');
+    })
+    new Promise(function(resolve) {
+        console.log('4');
+        resolve();
+    }).then(function() {
+        console.log('5')
+    })
+})
+process.nextTick(function() {
+    console.log('6');
+})
+new Promise(function(resolve) {
+    console.log('7');
+    resolve();
+}).then(function() {
+    console.log('8')
+})
+
+setTimeout(function() {
+    console.log('9');
+    process.nextTick(function() {
+        console.log('10');
+    })
+    new Promise(function(resolve) {
+        console.log('11');
+        resolve();
+    }).then(function() {
+        console.log('12')
+    })
+})
+
+
+// 1 7 6 8 2 4 3 5 9 11 10 12
+
