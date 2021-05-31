@@ -2,10 +2,6 @@
 let Promise1 = require('./1.Promise')
 
 
-let p = new Promise ((reslove,reject)=>{
-    reslove(11)
-})
-
 
 // Promise.prototype.finally = function (cb){
 //     return this.then(data=>{
@@ -22,7 +18,7 @@ let p = new Promise ((reslove,reject)=>{
 //     )
 // }
 // 简版
-// Promise.resolve.finally = function(cb){
+// Promise.prototype.finally = function(cb){
 //     return this.then(
 //         data => Promise.resolve(cb()).then(data),
 //         err => Promise.resolve(cb()).then(()=>{throw err})
