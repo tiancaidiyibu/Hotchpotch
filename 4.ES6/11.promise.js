@@ -77,6 +77,44 @@ const { log } = console
 // }, function (err){
 //     console.log("rejected: ", err);
 // });
+// 用通(ren)俗（hua）的话来说：
+// (1).then方法提供一个供自定义的回调函数，若传入非函数，则会忽略当前then方法。会直接爸promise的返回值跳过当前then直接提供给下一个then
+// (2).回调函数中会把上一个then中返回的值当做参数值供当前then方法调用。
+// (3).then方法执行完毕后需要返回一个新的值给下一个then调用（没有返回值默认使用undefined）。
+// (4).每个then只可能使用前一个then的返回值。
+// func().then(function () {
+//     return cb();
+// });
+// func().then(function () {
+//     cb();
+// });
+// func().then(cb());
+// func().then(cb);
+
+// let promise = new Promise((res,rej)=>{
+//     res(1)
+// })
+// promise.then((v)=>{
+//     console.log(v)
+//     return v+1
+// }).then((v)=>{
+//     console.log(v)
+//     throw new Error('fail')
+// }).then(v=>{
+//     console.log(v+1)
+//     return v+1
+// }).catch(e=>{
+//     console.log(e)
+//     return 5
+// }).then(v=>{
+//     console.log(v)
+//     return Promise.resolve(7)
+// }).then(v=>{
+//     console.log(v)
+// })
+ //1 2  Error: fail  5 7
+
+
 
 // 2.Promise.prototype.catch()
 // 重点：Promise 在resolve语句后面，再抛出错误，不会被捕获，等于没有抛出。因为 Promise 的状态一旦改变，就永久保持该状态，不会再变了。

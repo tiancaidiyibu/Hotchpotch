@@ -44,27 +44,27 @@
             container.innerHTML = count++
             return 100
         }
-        function debounce(func,wait,immediate){
-            var timeout,result
-            return function(){
-                var context = this
-                var args = arguments
-                if (timeout) clearTimeout(timeout);
+        // function debounce(func,wait,immediate){
+        //     var timeout,result
+        //     return function(){
+        //         var context = this
+        //         var args = arguments
+        //         if (timeout) clearTimeout(timeout);
 
-                if(immediate){
-                    var callNow = !timeout; 
-                    timeout = setTimeout(function(){  //定时器开始先产生一个timeout，时间结束timeout为null
-                        timeout = null;
-                    }, wait)
-                    if (callNow) result = func.apply(context, args)  //如果callNow为true则执行该动作
-                }else{
-                    timeout = setTimeout(function(){
-                        result = func.apply(context,args)
-                    },wait)
-                }
-                return result
-            }
-        }
+        //         if(immediate){
+        //             var callNow = !timeout; 
+                    // timeout = setTimeout(function(){  //定时器开始先产生一个timeout，时间结束timeout为null
+                    //     timeout = null;
+                    // }, wait)
+        //             if (callNow) result = func.apply(context, args)  //如果callNow为true则执行该动作
+        //         }else{
+        //             timeout = setTimeout(function(){
+        //                 result = func.apply(context,args)
+        //             },wait)
+        //         }
+        //         return result
+        //     }
+        // }
         container.onmousemove = debounce(getUserAction,1000,1)
 
 

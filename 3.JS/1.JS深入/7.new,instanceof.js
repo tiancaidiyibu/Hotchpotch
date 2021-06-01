@@ -7,8 +7,6 @@
 // }
 
 
-
-
 // function createInstanceof(left,right){
 //     let O = right.prototype
 //     left = left.__proto__
