@@ -67,7 +67,7 @@ const { log } = console
 
 
 // 3.调用 Iterator 接口的场合
-// 1）解构赋值
+// （1）解构赋值
 // 对数组和 Set 结构进行解构赋值时，会默认调用Symbol.iterator方法。
 // let [x,y] = new Set([1,2])
 // log(x,y) //1   2

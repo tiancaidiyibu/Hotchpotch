@@ -1,5 +1,43 @@
 const { log } = console
 
+class Promise {
+    constructor(executor){
+        this.status = 'Pending'
+        this.values = undefined
+        this.reason = undefined
+        let resolve = values =>{
+            if(this.status === 'Pending'){
+                this.values = values
+                this.status = 'RESOLVED'
+            }
+        }
+        let reject = reason => {
+            if(this.status === 'Pending'){
+                this.reason = reason
+                this.status = 'REJECTD'
+            }
+        }
+        try {
+            executor(resolve,reject)
+        } catch (error) {
+            reject(error)
+        }
+        
+    }
+    then(onFullfilled,onRejected){
+        switch(this.status){
+            case "resolved":
+                onFullfilled(self.value);
+                break;
+            case "rejected":
+                onRejected(self.reason);
+                break;
+            default:  
+        }
+    }
+    
+}
+
 
 // Promise的含义:
 // 简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
@@ -78,7 +116,7 @@ const { log } = console
 //     console.log("rejected: ", err);
 // });
 // 用通(ren)俗（hua）的话来说：
-// (1).then方法提供一个供自定义的回调函数，若传入非函数，则会忽略当前then方法。会直接爸promise的返回值跳过当前then直接提供给下一个then
+// (1).then方法提供一个供自定义的回调函数，若传入非函数，则会忽略当前then方法。会直接把promise的返回值跳过当前then直接提供给下一个then
 // (2).回调函数中会把上一个then中返回的值当做参数值供当前then方法调用。
 // (3).then方法执行完毕后需要返回一个新的值给下一个then调用（没有返回值默认使用undefined）。
 // (4).每个then只可能使用前一个then的返回值。
@@ -136,7 +174,8 @@ const { log } = console
 // finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是fulfilled还是rejected。这表明，finally方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。
 
 
-// 构造函数方法
+// 构造函数方
+
 // 1.Promise.all([Iterator]) 用于将多个 Promise 实例，包装成一个新的 Promise 实例。 接受一个数组（具有 Iterator 接口）作为参数，数组项都是 Promise 实例，
 // 重点:如果Iterator中的成员有不是promise实例的话，那我会先调用Promise.resolve()将其转换成Promise实例
 // const p = Promise.all([p1, p2, p3]);
@@ -164,6 +203,28 @@ const { log } = console
 // .catch(e => console.log(e));
 // // ["hello", Error: 报错了]
 
+// Promise.all = function(...args){
+//     return new Promise((res,rej)=>{
+//         let arr = []
+//         let index = 0
+//         function processData(data,key){
+//             index++
+//             arr[key] = data
+//             if(index===args.length){
+//                 res(data)
+//             }
+//         }
+//         for (let index = 0; index < args.length; index++) {
+//             let cur = args[index]
+//             if(isPromise(cur)){
+//                 cur.then(data=>processData(data,index),err=>rej(err))
+//             }else{
+//                 processData(cur,index)
+//             }  
+//         }
+//     })
+// }
+
 // 2.Promise.race([Interator]):
 // Promise.race()方法的参数与Promise.all()方法一样，如果不是 Promise 实例，就会先调用下面讲到的Promise.resolve()方法，将参数转为 Promise 实例，再进一步处理。
 // const p = Promise.race([p1, p2, p3]);
@@ -178,6 +239,26 @@ const { log } = console
 // .then(console.log)
 // .catch(console.error);
 
+// Promise.race = function(Interator){
+//     let args = Array.from(Interator)
+//     return new Promise((res,rej)=>{
+//         if(args.length = 0){
+//             return 
+//         }else{
+//             for (let index = 0; index < args.length; index++) {
+//                 Promise.resolve(args[index]).then(data=>{
+//                     res(data)
+//                     return
+//                 },err=>{
+//                     rej(err)
+//                     return
+//                 })
+                
+//             }
+//         }
+//     })
+// }
+
 // 3.Promise.allSettled([Interator])
 // 接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才会结束。
 // 该方法返回的新的 Promise 实例，一旦结束，状态总是fulfilled，不会变成rejected。状态变成fulfilled后，Promise 的监听函数接收到的参数是一个数组，每个成员对应一个传入Promise.allSettled()的 Promise 实例
@@ -191,6 +272,30 @@ const { log } = console
 //     { status: 'fulfilled', value: 42 },
 //     { status: 'rejected', reason: -1 }
 // ]
+
+// Promise.allSettled = function(Interator){
+//     let args = Array.from(Interator)
+//     return new Promise((res,rej)=>{
+//         let arr = []
+//         let index =0
+//         function processData(key,data){
+//             index++
+//             arr[key] = data
+//             if(args.length === index){
+//                 res(arr)
+//             }
+//         }
+//         for (let index = 0; index < args.length; index++) {
+//             const cur = args[index];
+//             Promise.resolve(cur).then(data=>{
+//                 processData(index,data)
+//             },err=>{
+//                 processData(index,data)
+//             })
+//         }
+//     })
+// }
+
 
 // 4.Promise.any() //es2021提出
 // 该方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回。只要参数实例有一个变成fulfilled状态，包装实例就会变成fulfilled状态；如果所有参数实例都变成rejected状态，包装实例就会变成rejected状态。
@@ -220,10 +325,27 @@ const { log } = console
 // const p = Promise.resolve();
 // p.then(function () {  });
 
+// Promise.resolve = function(value){
+//     if(value instanceof Promise){
+//         res(value)
+//     }
+//     return new Promise((res,rej)=>{
+//         if(value && typeof value ==='object' && typeof value.then === 'function'){
+//             value.then(res,rej)
+//         }else{
+//             res(value)
+//         }
+//     })
+// }
+
 // 6.Promise.reject(reson)
 // Promise.reject('出错了') 等同于 new Promise((resolve, reject) => reject('出错了'))
 
-
+// Promise.reject = function(value){
+//     return new Promise((res,rej)=>{
+//         rej(value)
+//     })
+// }
 
 
 

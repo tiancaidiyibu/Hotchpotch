@@ -5,9 +5,6 @@
 // 将请求委托给某⼀个策略类。要做到这⼀点，说明Context中要维持对某个策略对象的引⽤
 
 
-
-
-
 // 奖⾦计算，绩效为 S 的⼈年 终奖有 4 倍⼯资，绩效为 A 的⼈年终奖有 3 倍⼯资，⽽绩效为 B 的⼈年终奖是 2 倍⼯资
 // var calculateBonus = function( performanceLevel, salary ){
 //     if ( performanceLevel === 'S' ){
@@ -31,17 +28,6 @@
 //     A:3,
 //     B:2
 // }
-// var strategies = {
-//     "S": function( salary ){
-//         return salary * 4;
-//     },
-//     "A": function( salary ){
-//         return salary * 3;
-//     },
-//     "B": function( salary ){
-//         return salary * 2;
-//     }
-// };
 // var strategies = {
 //     "S": function( salary ){
 //         return salary * 4;

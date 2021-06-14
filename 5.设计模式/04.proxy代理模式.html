@@ -2,6 +2,7 @@
 常⽤的虚拟代理形式：某⼀个花销很⼤的操作，可以通过虚拟代理的⽅式延迟到这种需要它的时候才去创建（例：使⽤虚拟代理实现图⽚懒加载）
 图⽚懒加载的⽅式：先通过⼀张loading图占位，然后通过异步的⽅式加载图⽚，等图⽚加载好了再把完成的图⽚加载到img标签⾥⾯。 -->
 
+<!-- 防抖节流也算是代理模式 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,10 +14,29 @@
 <body>
     <script>
 
-        // 图片示例有一个setSrc方法，会先显示loading，在显示图片
+        // 图片实例有一个setSrc方法，会先显示loading，再显示图片
         let imgFunc = (function(){
-            let imgNode = 
+            let imgNode = document.createElement('img')
+            document.body.appendChild(imgNode)
+            return {
+                setSrc:function(src){
+                    imgNode.src = src
+                }
+            }
         })()
+        var ProxyImage = (function(){
+            var img = new Image()
+            img.onload = function(){
+                imgFunc.setSrc(this.src)
+            }
+            return {
+                setSrc:function(src){
+                    imgFunc.setSrc('./haha.gif')
+                    img.src = src
+                }
+            }
+        })()
+        ProxyImage.setSrc('https://pics4.baidu.com/feed/a9d3fd1f4134970a61827002f8df73c0a6865dc3.jpeg?token=e83eca9d470c9d02817799e19e285f7b')
     </script>
 </body>
 </html>

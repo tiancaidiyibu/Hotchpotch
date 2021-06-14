@@ -65,7 +65,29 @@
         //         return result
         //     }
         // }
-        container.onmousemove = debounce(getUserAction,1000,1)
+
+        // function debounce(func,wait,immediate){
+        //     let timeout , result
+        //     return function(){
+                
+        //         let context = this
+        //         let args = arguments
+        //         if(timeout) clearTimeout(timeout)
+        //         if(immediate){
+        //             var callNow = !timeout; 
+        //             timeout = setTimeout(function(){
+        //                 timeout = null
+        //             },wait)
+        //             if(callNow) result = func.apply(context, args)
+        //         }else {
+        //             timeout = setTimeout(function(){
+        //                 result = func.apply(context,args)
+        //             },wait)
+        //         }
+        //         return result
+        //     }
+        // }
+        // container.onmousemove = debounce(getUserAction,1000,1)
 
 
         let count1 = 1
@@ -77,30 +99,44 @@
             return 100
         }
         // function throttle(func,wait){
-        //     var previous = 0;
+        //     let  timeout
         //     return function(){
-        //         var now = +new Date()
         //         var context = this
         //         var args = arguments
-        //         if(now - previous > wait){
-        //             func.apply(context,args)
-        //             previous =now
+        //         if(!timeout){
+        //             timeout = setTimeout(function(){
+        //                 func.apply(context,args)
+        //                 timeout = null
+        //             },wait)
         //         }
         //     }
+ 
         // }
-        function throttle(func,wait){
-            var timeout
-            return function(){
-                var context = this
-                var args = arguments
-                if(!timeout){
-                    timeout = setTimeout(function(){
-                        timeout = null
-                        func.apply(context,args)
-                    },wait)
-                }
-            }
-        }
+// function throttle(func,wait){
+//     var previous = 0;
+//     return function(){
+//         var now = +new Date()
+//         var context = this
+//         var args = arguments
+//         if(now - previous > wait){
+//             func.apply(context,args)
+//             previous =now
+//         }
+//     }
+// }
+// function throttle(func,wait){
+//     var timeout
+//     return function(){
+//         var context = this
+//         var args = arguments
+//         if(!timeout){
+//             timeout = setTimeout(function(){
+//                 timeout = null
+//                 func.apply(context,args)
+//             },wait)
+//         }
+//     }
+// }
         container1.onmousemove = throttle(getUserAction1, 1000);
     </script>
     

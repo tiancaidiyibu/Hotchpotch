@@ -19,7 +19,7 @@ const { log } = console
 // (4).字符串 扩展运算符可以将字符串转化成数组
 // const arr = [...'123'] //arr=[1,2,3]
 // (5).实现了 Iterator 接口的对象
-// 任何定义了遍历器（Iterator）接口的对象，都可以用扩展运算符转为真正的数组。
+// 任何定义了遍历器（Iterator）接口的对象，都可以用扩展运算符转为真正的数组。(内置了for of循环)
 // const arr = [...new Set([1,2,3])] //arr = [1,2,3]
 
 
@@ -194,6 +194,8 @@ const { log } = console
 // deleteCount:移除元素的个数
 // let arr = [1,2,3,4,5]
 // log(arr.splice(0,2,7),arr) //[1,2] ,  arr=[7,3,4,5]
+
+
 
 
 

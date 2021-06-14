@@ -58,7 +58,7 @@ const { log } = console
 
 
 
-// 构造函数方法
+// 静态方法
 // 1.Object.assign(target, ...sources) : 用于将自身所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
 // 只会拷贝源对象自身的并且可枚举的属性到目标对象。不拷贝继承的属性(例如Object.create（))。
 // 如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖。后面的源对象的属性将类似地覆盖前面的源对象的属性。
@@ -165,6 +165,10 @@ const { log } = console
 // log(Object.fromEntries([['a',1],['b',2]])) //{ a: 1, b: 2 }
 // 用法：该方法的一个用处是配合URLSearchParams对象，将查询字符串转为对象。
 // log(Object.fromEntries(new URLSearchParams('foo=bar&a=2'))) //{ foo: 'bar', a: '2' }
+// let str = 'foo=bar&a=2'
+// log(Object.fromEntries(str.split('&').map(item=>{
+//     return item.split('=')
+// }))) //{ foo: 'bar', a: '2' }
 
 // 7.Object.freeze(obj) : 可以冻结一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改该对象已有属性的属性描述符。
 // 此外，冻结一个对象后该对象的原型也不能被修改。freeze() 返回和传入的参数相同的对象。
