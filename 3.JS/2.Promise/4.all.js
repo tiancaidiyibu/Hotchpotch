@@ -35,6 +35,68 @@
 // }
 
 
+// Promise.all = function(interator){
+//     let arr = Array.from(interator)
+
+//     return new Promise((res,rej)=>{
+//         let index = 0
+//         let newArr = []
+//         function processDate(key,value){
+//             newArr[key] = value
+//             index++
+//             if(index === arr.length){
+//                 res(newArr)
+//             }
+//         }
+//         for (let i = 0; i < arr.length; i++) {
+//             Promise.resolve(arr[i]).then((value)=>{
+//                 processDate(i,value)
+//             },err=>{
+//                 rej(err)
+//                  return 
+//             })
+            
+//         }
+//     })
+// }
+// Promise.race = function(interator){
+//     let array = Array.from(interator)
+//     return new Promise((res,rej)=>{
+//         for (let index = 0; index < array.length; index++) {
+//             const current = array[index];
+//             Promise.resolve(current).then(data=>{
+//                 res(data)
+//                 return
+//             },err=>{
+//                 rej(err)
+//                 return
+//             })
+            
+//         }
+//     })
+// }
+// Promise.allSettle = function(interator){
+//     let array = Array.from(interator)
+//     return new Promise((res,rej)=>{
+//         let newArr = []
+//         let count = 0
+//         for (let index = 0; index < array.length; index++) {
+//             const current = array[index];
+//             Promise.resolve(current).then(data=>{
+//                 newArr[index] = data
+//                 count ++
+//             },err=>{
+//                 newArr[index] = err
+//                 count ++
+//             })
+//         }
+//         if(count===array.length){
+//             res(newArr)
+//         }
+//     })
+// }
+
+
 let Promise1 = require('./1.Promise')
 const fs = require('fs')
 

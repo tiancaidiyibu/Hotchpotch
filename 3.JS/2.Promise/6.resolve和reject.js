@@ -20,6 +20,19 @@
 //     })
 // }
 
+Promise.resolve = function(value){
+    if(value instanceof Promise) value
+    return new Promise ((res,rej)=>{
+        if(value && typeof value === 'object' && value.then && typeof value.then === 'function'){
+            setTimeout(()=>{
+                value.then(res,rej)
+            })
+        }else{
+            res(value)
+        }
+    })
+}
+
 // let p = Promise.resolve(20);
 // p.then((data) => {
 //     console.log(data);

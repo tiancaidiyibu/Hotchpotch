@@ -123,6 +123,7 @@
 //     this.age = age;
 // }
 
+
 // var F = function(){}
 // F.prototype = Parent.prototype
 // Child.prototype = new F()
@@ -134,3 +135,5 @@
 // }
 // createPrototype(Child,Parent)
 // var child = new Child('ikki',18)
+
+

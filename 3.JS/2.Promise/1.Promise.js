@@ -2,6 +2,38 @@ const PENDING  = 'PENDING'
 const RESOLVED = 'RESOLVED'
 const REJECTD = 'REJECTD'
 
+
+
+
+class Promise2 {
+    constructor(executor){
+        this.status = PENDING
+        this.value = undefined
+        this.reason = undefined    
+        let reslove = (value) =>{
+            if(this.status === 'PENDING'){
+                this.value = value
+                this.status = RESOLVED
+            }
+        }
+        let reject = (reson)=>{
+            if(this.status === 'PENDING'){
+                this.reason = reason
+                this.status = REJECTD
+            }
+        }
+        try {
+            executor(reslove,reject)
+        } catch (error) {
+            reject(error)
+        }
+        
+    }
+    then(onResloved,onRejectd){
+        
+    }
+}
+
 const resolvePromise = (promise2,x,resolve,reject) => {
     if(promise2 === x){
         return

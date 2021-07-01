@@ -25,6 +25,13 @@ let Promise1 = require('./1.Promise')
 //     )
 // }
 
+Promise.prototype.finally = function(cb){
+    return this.then(
+        data => Promise.resolve(cb()).then(data),
+        err => Promise.resolve(cb()).then(()=>{throw err})
+    )
+}
+
 p.finally(()=>{
     return new Promise((reslove,reject)=>{
         setTimeout(()=>{

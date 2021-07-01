@@ -74,5 +74,3 @@
 // var obj2 = new bindFoo2('18');
 // console.log(obj2.habit);
 // console.log(obj2.friend);
-
-

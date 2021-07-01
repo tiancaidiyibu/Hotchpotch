@@ -45,28 +45,6 @@
             return 100
         }
         // function debounce(func,wait,immediate){
-        //     var timeout,result
-        //     return function(){
-        //         var context = this
-        //         var args = arguments
-        //         if (timeout) clearTimeout(timeout);
-
-        //         if(immediate){
-        //             var callNow = !timeout; 
-                    // timeout = setTimeout(function(){  //定时器开始先产生一个timeout，时间结束timeout为null
-                    //     timeout = null;
-                    // }, wait)
-        //             if (callNow) result = func.apply(context, args)  //如果callNow为true则执行该动作
-        //         }else{
-        //             timeout = setTimeout(function(){
-        //                 result = func.apply(context,args)
-        //             },wait)
-        //         }
-        //         return result
-        //     }
-        // }
-
-        // function debounce(func,wait,immediate){
         //     let timeout , result
         //     return function(){
                 
@@ -98,26 +76,28 @@
             container1.innerHTML = count1++
             return 100
         }
-        // function throttle(func,wait){
-        //     let  timeout
-        //     return function(){
-        //         var context = this
-        //         var args = arguments
-        //         if(!timeout){
-        //             timeout = setTimeout(function(){
-        //                 func.apply(context,args)
-        //                 timeout = null
-        //             },wait)
-        //         }
-        //     }
- 
-        // }
+        function throttle(func,wait){
+            let timeout
+            return function(){
+                
+                var context = this
+                var args = arguments
+                if(!timeout){
+                    timeout = setTimeout(()=>{
+                        func.apply(context,args)
+                        timeout = null
+                    },wait)
+                }
+            }
+        }
+
+
 // function throttle(func,wait){
 //     var previous = 0;
 //     return function(){
 //         var now = +new Date()
-//         var context = this
-//         var args = arguments
+        // var context = this
+        // var args = arguments
 //         if(now - previous > wait){
 //             func.apply(context,args)
 //             previous =now
